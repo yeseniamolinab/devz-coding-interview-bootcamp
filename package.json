@@ -1,0 +1,11 @@
+{
+  "name": "devz-interview-bootcamp",
+  "version": "1.0.0",
+  "description": "Interview bootcamp",
+  "main": "index.js",
+  "repository": "https://github.com/yeseniamolinab/devz-coding-interview-bootcamp.git",
+  "author": "Yesenia Molina",
+  "license": "MIT",
+  "private": false,
+  "type": "module"
+}
