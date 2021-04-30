@@ -2,7 +2,7 @@ import { Node } from '../utils/node.js';
 
 export class Stack {
     constructor() {
-        this.first = null;
+        this.last = null;
         this.size = 0;
     }
 
@@ -10,12 +10,12 @@ export class Stack {
         let node = new Node(val);
         if(this.size === 0) {
             node.min = val;
-            this.first = node;
+            this.last = node;
         } else {
-            let currentFirst = this.first;
-            node.min = Math.min(currentFirst.min, val);
-            this.first = node;
-            this.first.next = currentFirst;
+            let currentLast = this.last;
+            node.min = Math.min(currentLast.min, val);
+            this.last = node;
+            this.last.next = currentLast;
         }
 
         return this.size++;
@@ -23,17 +23,17 @@ export class Stack {
 
     pop(){
         if(this.size === 0) return null;
-        let currentFirst = this.first;
-        this.first = currentFirst.next;
+        let currentLast = this.last;
+        this.last = currentLast.next;
         this.size--;
-        return currentFirst.val;
+        return currentLast.val;
     }
 
     top(){
-        return this.first.val;
+        return this.last.val;
     }
 
     getMin(){
-        return this.first.min;
+        return this.last.min;
     }
 }
