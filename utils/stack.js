@@ -36,4 +36,8 @@ export class Stack {
     getMin(){
         return this.last.min;
     }
+
+    empty() {
+        return this.size <= 0;
+    }
 }
