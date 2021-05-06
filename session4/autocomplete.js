@@ -40,16 +40,13 @@ class Trie {
 
     getNext(prefix) {
         let lastNode = this.getLast(prefix);
-        return [...lastNode.children.keys()];
+        return lastNode ? [...lastNode.children.keys()] : [];
     }
 
     getLast(prefix) {
         let lastNode = this.root;
         for(let i = 0; i < prefix.length; i++) {
-            let next = lastNode.children.get(prefix[i]);
-            if(!next) {
-                break;
-            }
+            let next = lastNode ? lastNode.children.get(prefix[i]) : null;
             lastNode = next;
         }
 
@@ -60,9 +57,11 @@ class Trie {
         let lastNode = this.getLast(prefix);
         let output = [];
         lastNode.children.forEach(child => {
-            // this doesn't work if I send 'd' as prefix because since d is not terminal 
             if(child.isTerminal) { 
                 output.push(prefix + child.data)
+            } else {
+                let next = this.getNext(prefix);
+                output.push(...this.getAutoComplete(prefix + next));
             }
         });
         
@@ -73,9 +72,9 @@ class Trie {
 function test1() {
     let trie = new Trie();
     trie.build(['cat', 'car', 'cap', 'can', 'dog']);
-    console.log(trie.getNext('ca'));
-    console.log(trie.getAutoComplete('ca'));
-    console.log(trie.getAutoComplete('do'));
+    console.log(trie.getNext('c'));
+    console.log(trie.getAutoComplete('c'));
+    console.log(trie.getAutoComplete('d'));
 }
 
 test1();
